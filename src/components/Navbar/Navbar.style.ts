@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../styles/breakpoints";
 
 export const NavbarContainer = styled.nav`
   padding: 0 16px;
@@ -7,6 +8,10 @@ export const NavbarContainer = styled.nav`
   justify-content: space-between;
   position: relative;
   border-bottom: 1px solid ${({ theme }) => theme.colors.navBorderBottom};
+
+  @media ${device.md} {
+    padding: 24px 16px;
+  }
 `;
 
 export const NavLeft = styled.div`
@@ -16,6 +21,10 @@ export const NavLeft = styled.div`
 
   h1 {
     cursor: pointer;
+  }
+
+  @media ${device.md} {
+    gap: 24px;
   }
 `;
 
@@ -33,6 +42,10 @@ export const NavList = styled.ul`
   display: flex;
   align-items: center;
   gap: 24px;
+
+  @media ${device.md} {
+    display: none;
+  }
 `;
 
 export const NavItem = styled.li`

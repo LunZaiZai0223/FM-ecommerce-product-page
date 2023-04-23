@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // components
 import Avatar from "../Avatar";
 import Cart from "../../components/Cart";
+import MobileNav from "../MobileNav";
 import Button from "../UI/Button";
+
+// hooks
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 // assets
 import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
 import { ReactComponent as CartIcon } from "../../assets/icons/icon-cart.svg";
+import { ReactComponent as MenuIcon } from "../../assets/icons/icon-menu.svg";
 import AvatarSrc from "../../assets/images/image-avatar.png";
 
 // style
@@ -19,16 +24,40 @@ import {
   NavList,
   CartQty,
 } from "./Navbar.style";
+import { size } from "../../styles/breakpoints";
 
 // constants
-const NAV_ITEMS = ["Collections", "Men", "Women", "About", "Contact"];
+import { NAV_ITEMS } from "../../constants/nav-item.constants";
 
 const Navbar = () => {
   const [cartIsActivated, setCartIsActivated] = useState(false);
+  const [mobileNavIsActivated, setMobileNavIsActivated] = useState(false);
+  const { windowWidth } = useWindowDimensions();
+  const isInMobile = windowWidth <= +size.md.split("px")[0];
+
+  useEffect(() => {
+    if (!isInMobile && mobileNavIsActivated) {
+      setMobileNavIsActivated(false);
+    }
+  }, [isInMobile]);
 
   return (
     <NavbarContainer>
+      {mobileNavIsActivated && (
+        <MobileNav
+          navItems={NAV_ITEMS}
+          onToggle={() => setMobileNavIsActivated((prev) => !prev)}
+        />
+      )}
       <NavLeft>
+        {isInMobile && (
+          <Button
+            shouldHoverEffect={false}
+            clickFunc={() => setMobileNavIsActivated(true)}
+          >
+            <MenuIcon />
+          </Button>
+        )}
         <h1>
           <Logo />
         </h1>
