@@ -39,7 +39,7 @@ const ProductInfo = () => {
         Featuring a durable rubber outer sole, they’ll withstand everything the
         weather can offer.
       </ProductDescription>
-      <ProductPriceContainer>
+      <ProductPriceContainer className="price-container">
         <PriceInfoWrapper>
           <NewPrice>$125.00</NewPrice>
           <DiscountWrapper>
@@ -48,7 +48,7 @@ const ProductInfo = () => {
         </PriceInfoWrapper>
         <OriginalPrice>$250.00</OriginalPrice>
       </ProductPriceContainer>
-      <ActionContainer>
+      <ActionContainer className="action-wrapper">
         <div>
           <Button
             clickFunc={() => handleChangeQty("decrease")}

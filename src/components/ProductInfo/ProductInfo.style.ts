@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../styles/breakpoints";
 
 export const CompanyName = styled.h4`
   color: ${({ theme }) => theme.colors.primary};
@@ -27,6 +28,12 @@ export const ProductPriceContainer = styled.div`
   flex-direction: column;
   gap: 14px;
   margin-top: 24px;
+
+  @media ${device.md} {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 `;
 
 export const PriceInfoWrapper = styled.div`
@@ -78,6 +85,14 @@ export const ActionContainer = styled.div`
 
   > div:nth-child(2) {
     flex: 2;
+  }
+
+  @media ${device.md} {
+    flex-direction: column;
+
+    > div {
+      width: 100%;
+    }
   }
 `;
 
