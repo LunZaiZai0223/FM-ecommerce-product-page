@@ -36,5 +36,5 @@ export const Action = styled.button<{ direction: "PREV" | "NEXT" }>`
   border-radius: 50%;
   border: 1px solid ${({ theme }) => theme.colors.black};
   background-color: ${({ theme }) => theme.colors.white};
-  z-index: 999;
+  z-index: 998;
 `;
