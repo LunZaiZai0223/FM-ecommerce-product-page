@@ -1,0 +1,71 @@
+@font-face {
+    font-family: 'Kumbh Sans';
+    font-style: normal;
+    font-weight: 100;
+    src: url('../assets/fonts/KumbhSans-Thin.woff') format('woff');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kumbh Sans';
+    font-style: normal;
+    font-weight: 200;
+    src: url('../assets/fonts/KumbhSans-ExtraLight.woff') format('woff');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kumbh Sans';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../assets/fonts/KumbhSans-Light.woff') format('woff');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kumbh Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../assets/fonts/KumbhSans-Regular.woff') format('woff');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kumbh Sans';
+    font-style: normal;
+    font-weight: 500;
+    src: url('../assets/fonts/KumbhSans-Medium.woff') format('woff');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kumbh Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: url('../assets/fonts/KumbhSans-SemiBold.woff') format('woff');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kumbh Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../assets/fonts/KumbhSans-Bold.ttf') format('ttf');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kumbh Sans';
+    font-style: normal;
+    font-weight: 800;
+    src: url('../assets/fonts/KumbhSans-ExtraBold.ttf') format('ttf');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kumbh Sans';
+    font-style: normal;
+    font-weight: 900;
+    src: url('../assets/fonts/KumbhSans-Black.ttf') format('ttf');
+    font-display: swap;
+}
