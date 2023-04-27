@@ -1,5 +1,8 @@
+// store
+import { useAppSelector, useAppDispatch } from "../../store/utils";
+import { removeCart, checkoutCart } from "../../store/cartSlice";
+
 // assets
-import ProductThumbnail from "../../assets/images/image-product-1-thumbnail.jpg";
 import { ReactComponent as DeleteIcon } from "../../assets/icons/icon-delete.svg";
 
 // components
@@ -16,6 +19,8 @@ import {
   CartActionWrapper,
   ProductText,
   ProductStrongText,
+  EmptyCartContainer,
+  EmptyCartMessage,
 } from "./Cart.style";
 
 interface Props {
@@ -23,28 +28,65 @@ interface Props {
 }
 
 const Cart = ({ mouseLeaveHandler }: Props) => {
+  const { cartList } = useAppSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
+
+  const renderCartContent = () => {
+    if (cartList.length) {
+      return (
+        <>
+          <CartList>
+            {cartList.map((cart) => {
+              const {
+                id,
+                productName,
+                productPrice,
+                productQty,
+                productThumbnail,
+              } = cart;
+              return (
+                <CartItem key={id}>
+                  <CartThumbnail>
+                    <img src={productThumbnail} alt="product thumbnail" />
+                  </CartThumbnail>
+                  <CartContent>
+                    <ProductText>{productName}</ProductText>
+                    <ProductText>
+                      ${productPrice} x {productQty}{" "}
+                      <ProductStrongText>
+                        ${(productPrice * productQty).toFixed(2)}
+                      </ProductStrongText>
+                    </ProductText>
+                  </CartContent>
+                  <Button clickFunc={() => dispatch(removeCart(cart))}>
+                    <DeleteIcon />
+                  </Button>
+                </CartItem>
+              );
+            })}
+          </CartList>
+          <CartActionWrapper>
+            <Button
+              fillType="primary"
+              clickFunc={() => dispatch(checkoutCart())}
+            >
+              Checkout
+            </Button>
+          </CartActionWrapper>
+        </>
+      );
+    } else {
+      return (
+        <EmptyCartContainer>
+          <EmptyCartMessage>Your cart is empty.</EmptyCartMessage>
+        </EmptyCartContainer>
+      );
+    }
+  };
   return (
     <CartContainer onMouseLeave={mouseLeaveHandler}>
       <CartHeader>Cart</CartHeader>
-      <CartList>
-        <CartItem>
-          <CartThumbnail>
-            <img src={ProductThumbnail} alt="product thumbnail" />
-          </CartThumbnail>
-          <CartContent>
-            <ProductText>Fall Limited Edition Sneakers</ProductText>
-            <ProductText>
-              $125.00 x 3 <ProductStrongText>$375.00</ProductStrongText>
-            </ProductText>
-          </CartContent>
-          <Button>
-            <DeleteIcon />
-          </Button>
-        </CartItem>
-      </CartList>
-      <CartActionWrapper>
-        <Button fillType="primary">Checkout</Button>
-      </CartActionWrapper>
+      {renderCartContent()}
     </CartContainer>
   );
 };

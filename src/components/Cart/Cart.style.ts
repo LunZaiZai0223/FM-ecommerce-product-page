@@ -4,7 +4,7 @@ import { device } from "../../styles/breakpoints";
 export const CartContainer = styled.div`
   z-index: 999;
   position: absolute;
-  bottom: -250%;
+  top: 90%;
   right: 16px;
   padding: 16px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 0 15px 10px;
@@ -66,4 +66,22 @@ export const ProductText = styled.span`
 export const ProductStrongText = styled(ProductText)`
   color: ${({ theme }) => theme.colors.black};
   font-weight: 700;
+`;
+
+export const EmptyCartContainer = styled.div`
+  min-height: 250px;
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media ${device.md} {
+    width: 100%;
+  }
+`;
+
+export const EmptyCartMessage = styled.span`
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.normalText};
+  font-size: 13px;
 `;
