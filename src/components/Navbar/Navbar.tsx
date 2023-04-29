@@ -28,7 +28,7 @@ import {
 import { size } from "../../styles/breakpoints";
 
 // constants
-import { NAV_ITEMS } from "../../constants/nav-item.constants";
+import { NAV_ITEMS } from "../../constants/nav-item.constant";
 
 const Navbar = () => {
   const [cartIsActivated, setCartIsActivated] = useState(false);
