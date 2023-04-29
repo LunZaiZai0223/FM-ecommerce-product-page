@@ -4,15 +4,15 @@ import { Props } from "./Button";
 export const BasicButton = styled.button<Props>`
   padding: 6px;
   position: relative;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  ${({ disabled }) => disabled && "background-color: unset;"} }
 
   &:hover {
-    background-color: ${({ theme, shouldHoverEffect }) =>
-      shouldHoverEffect ? theme.colors.secondary : "transparent"};
+    ${({ shouldHoverEffect, theme, disabled }) =>
+      shouldHoverEffect &&
+      !disabled &&
+      `background-color: ${theme.colors.secondary};`}
     border-radius: 50%;
-  }
-
-  &:disabled {
-    cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   }
 `;
 
