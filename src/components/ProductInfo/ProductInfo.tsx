@@ -1,11 +1,17 @@
+import { useAppDispatch, useAppSelector } from "../../store/utils";
+import { addCart } from "../../store/cartSlice";
+import { activateNotification } from "../../store/notificationSlice";
+
 // hooks
 import useProductQty from "../../hooks/useProductQty";
 
 // components
 import Button from "../../components/UI/Button";
+import Notification from "../../components/Notification";
 
 // assets
 import { ReactComponent as CartIcon } from "../../assets/icons/icon-cart.svg";
+import ProductThumbnail from "../../assets/images/image-product-1-thumbnail.jpg";
 
 // styles
 import {
@@ -23,30 +29,64 @@ import {
   ButtonContent,
 } from "./ProductInfo.style";
 
+// interface
+interface ProductInfoContent {
+  companyName: string;
+  productName: string;
+  description: string;
+  price: number;
+  discount: number;
+  originalPrice: number;
+  productThumbnail: string;
+}
+
+const PRODUCT_INFO_CONTENT: ProductInfoContent = {
+  companyName: "Sneaker Company",
+  productName: "Fall Limited Edition Sneakers",
+  description:
+    "These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.",
+  price: 125,
+  discount: 50,
+  originalPrice: 250,
+  productThumbnail: ProductThumbnail,
+};
+
 const ProductInfo = () => {
+  const dispatch = useAppDispatch();
+  const { isActivated } = useAppSelector((state) => state.notification);
   const { qty, handleChangeQty } = useProductQty();
 
-  console.log(handleChangeQty);
+  const handleCheckout = () => {
+    dispatch(
+      addCart({
+        productName: PRODUCT_INFO_CONTENT.productName,
+        productThumbnail: PRODUCT_INFO_CONTENT.productThumbnail,
+        productPrice: PRODUCT_INFO_CONTENT.price,
+        productQty: qty,
+        id: Date.now(),
+      })
+    );
+    handleChangeQty("init");
+    dispatch(activateNotification({ type: "ADD_CART" }));
+  };
 
   return (
     <>
-      <CompanyName>Sneaker Company</CompanyName>
+      <CompanyName>{PRODUCT_INFO_CONTENT.companyName}</CompanyName>
 
-      <ProductName>Fall Limited Edition Sneakers</ProductName>
+      <ProductName>{PRODUCT_INFO_CONTENT.productName}</ProductName>
 
       <ProductDescription>
-        These low-profile sneakers are your perfect casual wear companion.
-        Featuring a durable rubber outer sole, they’ll withstand everything the
-        weather can offer.
+        {PRODUCT_INFO_CONTENT.description}
       </ProductDescription>
       <ProductPriceContainer className="price-container">
         <PriceInfoWrapper>
-          <NewPrice>$125.00</NewPrice>
+          <NewPrice>${PRODUCT_INFO_CONTENT.price.toFixed(2)}</NewPrice>
           <DiscountWrapper>
-            <span>50%</span>
+            <span>%{PRODUCT_INFO_CONTENT.discount}</span>
           </DiscountWrapper>
         </PriceInfoWrapper>
-        <OriginalPrice>$250.00</OriginalPrice>
+        <OriginalPrice>${PRODUCT_INFO_CONTENT.originalPrice}</OriginalPrice>
       </ProductPriceContainer>
       <ActionContainer className="action-wrapper">
         <div>
@@ -62,7 +102,7 @@ const ProductInfo = () => {
           </Button>
         </div>
         <div>
-          <Button fillType="primary">
+          <Button fillType="primary" clickFunc={handleCheckout}>
             <ButtonContent>
               <CartIcon />
               Add to cart
@@ -70,6 +110,7 @@ const ProductInfo = () => {
           </Button>
         </div>
       </ActionContainer>
+      {isActivated && <Notification />}
     </>
   );
 };

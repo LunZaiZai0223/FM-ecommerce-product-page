@@ -19,6 +19,8 @@ export const CartContainer = styled.div`
 
 export const CartList = styled.ul`
   margin-top: 16px;
+  max-height: 250px;
+  overflow-y: auto;
 
   @media ${device.md} {
     margin-top: 24px;

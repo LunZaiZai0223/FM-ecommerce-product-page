@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const useProductQty = () => {
   const [qty, setQty] = useState(1);
-  const handleChangeQty = (type: "increase" | "decrease") => {
+  const handleChangeQty = (type: "increase" | "decrease" | "init") => {
     switch (type) {
       case "increase":
         setQty((prevQty) => prevQty + 1);
@@ -10,6 +10,10 @@ const useProductQty = () => {
 
       case "decrease":
         setQty((prevQty) => prevQty - 1);
+        break;
+
+      case "init":
+        setQty(1);
         break;
     }
   };

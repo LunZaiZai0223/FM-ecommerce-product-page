@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useAppSelector } from "../../store/utils";
 
 // components
 import Avatar from "../Avatar";
@@ -33,6 +34,7 @@ const Navbar = () => {
   const [cartIsActivated, setCartIsActivated] = useState(false);
   const [mobileNavIsActivated, setMobileNavIsActivated] = useState(false);
   const { windowWidth } = useWindowDimensions();
+  const { cartList } = useAppSelector((state) => state.cart);
   const isInMobile = windowWidth <= +size.md.split("px")[0];
 
   useEffect(() => {
@@ -70,7 +72,7 @@ const Navbar = () => {
       <NavRight>
         <Button clickFunc={() => setCartIsActivated(!cartIsActivated)}>
           <CartIcon />
-          <CartQty>1</CartQty>
+          <CartQty>{cartList.length}</CartQty>
         </Button>
         <Avatar src={AvatarSrc} />
         {cartIsActivated && (

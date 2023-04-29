@@ -1,15 +1,10 @@
 import { useState } from "react";
 
 // assets
-import ProductImg1 from "../../assets/images/image-product-1.jpg";
-import ProductImg2 from "../../assets/images/image-product-2.jpg";
-import ProductImg3 from "../../assets/images/image-product-3.jpg";
-import ProductImg4 from "../../assets/images/image-product-4.jpg";
 import { ReactComponent as ArrowNext } from "../../assets/icons/icon-next.svg";
 import { ReactComponent as ArrowPrev } from "../../assets/icons/icon-previous.svg";
 
 // components
-import Modal from "../UI/Modal";
 import ProductSlider from "../ProductSlider";
 
 // styles
@@ -21,7 +16,7 @@ import {
 } from "./ProductPreview.style";
 
 // constants
-const IMG_LIST = [ProductImg1, ProductImg2, ProductImg3, ProductImg4];
+import { PRODUCT_IMG_LIST } from "../../constants/img-list.constant";
 
 interface Props {
   shouldUseArrow?: boolean;
@@ -38,13 +33,17 @@ const ProductPreview = ({ shouldUseArrow, toggleDetail }: Props) => {
     switch (direction) {
       case "NEXT":
         setActivatedIndex(
-          activatedIndex + 1 > IMG_LIST.length - 1 ? 0 : activatedIndex + 1
+          activatedIndex + 1 > PRODUCT_IMG_LIST.length - 1
+            ? 0
+            : activatedIndex + 1
         );
         break;
 
       case "PREV":
         setActivatedIndex(
-          activatedIndex - 1 >= 0 ? activatedIndex - 1 : IMG_LIST.length - 1
+          activatedIndex - 1 >= 0
+            ? activatedIndex - 1
+            : PRODUCT_IMG_LIST.length - 1
         );
         break;
     }
@@ -58,7 +57,7 @@ const ProductPreview = ({ shouldUseArrow, toggleDetail }: Props) => {
             <ArrowPrev />
           </ControllerBtn>
         )}
-        <img src={IMG_LIST[activatedIndex]} alt="current product" />
+        <img src={PRODUCT_IMG_LIST[activatedIndex]} alt="current product" />
         {shouldUseArrow && (
           <ControllerBtn direction={"NEXT"} onClick={handleClickArrow("NEXT")}>
             <ArrowNext />
@@ -66,7 +65,7 @@ const ProductPreview = ({ shouldUseArrow, toggleDetail }: Props) => {
         )}
       </ProductImgWrapper>
       <ProductImgList>
-        {IMG_LIST.map((item, index) => {
+        {PRODUCT_IMG_LIST.map((item, index) => {
           return (
             <ProductImgItem
               key={index}

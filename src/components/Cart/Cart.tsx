@@ -1,6 +1,7 @@
 // store
 import { useAppSelector, useAppDispatch } from "../../store/utils";
 import { removeCart, checkoutCart } from "../../store/cartSlice";
+import { activateNotification } from "../../store/notificationSlice";
 
 // assets
 import { ReactComponent as DeleteIcon } from "../../assets/icons/icon-delete.svg";
@@ -23,6 +24,8 @@ import {
   EmptyCartMessage,
 } from "./Cart.style";
 
+// interfaces
+import { CartItem as CartItemInterface } from "../../store/cartSlice";
 interface Props {
   mouseLeaveHandler: () => void;
 }
@@ -30,6 +33,16 @@ interface Props {
 const Cart = ({ mouseLeaveHandler }: Props) => {
   const { cartList } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
+
+  const handleClickRemove = (cart: CartItemInterface) => () => {
+    dispatch(activateNotification({ type: "REMOVE_CART" }));
+    dispatch(removeCart(cart));
+  };
+
+  const handleClickCheckout = () => {
+    dispatch(checkoutCart());
+    dispatch(activateNotification({ type: "CHECKOUT" }));
+  };
 
   const renderCartContent = () => {
     if (cartList.length) {
@@ -58,7 +71,7 @@ const Cart = ({ mouseLeaveHandler }: Props) => {
                       </ProductStrongText>
                     </ProductText>
                   </CartContent>
-                  <Button clickFunc={() => dispatch(removeCart(cart))}>
+                  <Button clickFunc={handleClickRemove(cart)}>
                     <DeleteIcon />
                   </Button>
                 </CartItem>
@@ -66,10 +79,7 @@ const Cart = ({ mouseLeaveHandler }: Props) => {
             })}
           </CartList>
           <CartActionWrapper>
-            <Button
-              fillType="primary"
-              clickFunc={() => dispatch(checkoutCart())}
-            >
+            <Button fillType="primary" clickFunc={handleClickCheckout}>
               Checkout
             </Button>
           </CartActionWrapper>
