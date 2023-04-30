@@ -1,46 +1,76 @@
-# Getting Started with Create React App
+# Frontend Mentor - FM-ecommerce-product-page
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 目錄
 
-## Available Scripts
+- [專案結構](#專案結構)
+- [畫面](#畫面)
+- [功能](#功能)
+- [連結](#連結)
+- [使用技術](#使用技術)
+- [學習筆記](#學習筆記)
 
-In the project directory, you can run:
+## 專案結構
 
-### `npm start`
+```shell!
+├── assets --> 存放圖片、字體
+|  ├── fonts
+|  ├── icons
+|  └── images
+├── components --> 元件
+|  ├── Avatar
+|  ├── Cart
+|  ├── MobileNav
+|  ├── Navbar
+|  ├── Notification
+|  ├── Product
+|  ├── ProductInfo
+|  ├── ProductPreview
+|  ├── ProductSlider
+|  └── UI --> 各種重複性元件
+├── constants --> 資料常數
+|  ├── img-list.constant.ts
+|  └── nav-item.constant.ts
+├── hooks --> custom hooks
+|  ├── useProductQty.ts
+|  └── useWindowDimensions.tsx
+├── layouts
+|  └── RootLayout
+├── store --> redux
+|  ├── cartSlice.ts
+|  ├── index.ts
+|  ├── notificationSlice.ts
+|  └── utils.ts --> 重新封裝 useDispatch, useSelector 讓 TypeScript 可以推導型別
+└── styles --> style 設定
+   ├── breakpoints.ts
+   ├── font.module.css
+   ├── global.ts
+   └── theme.ts
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+## 畫面
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![CleanShot 2023-04-30 at 11 16 30](https://user-images.githubusercontent.com/77038018/235339993-ec179370-006b-4142-99e6-3e8a5b7a72b3.gif)
+![CleanShot 2023-04-30 at 11 18 26](https://user-images.githubusercontent.com/77038018/235339998-54489ea6-f3ab-4529-baec-2f443ab46cc7.gif)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 功能
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. 購物車基本流程（CRUD）
+2. 操作提示
+3. 產品圖點擊觀看詳情並切換圖片
+4. 手刻手機版圖片輪播
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 連結
 
-### `npm run eject`
+[Demo](https://lunzaizai0223.github.io/FM-ecommerce-product-page/)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 使用技術
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. React + TypeScript
+2. styled-component
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 學習筆記
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+[styled-component 筆記](https://hackmd.io/@lunzaizai/HyjZemH72)
